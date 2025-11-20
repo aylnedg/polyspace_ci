@@ -18,19 +18,40 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+         release: [ 2024b ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: checkout repo
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: run polyspace
+        run: | 
+         polyspace-bug-finder-navigator \
+           -project pst_deneme.psprj \
+           -results-dir results_bug_finder \
+           -output-name bug_finder_results
+         
+
+     - name: generate report polyspace
+        run: | 
+         polyspace-report-generator \
+           -results-dir results_bug_finder \
+           -report-dir results_bug_finder/report \
+           -format pdf,html \
+           -include-categories all
+
+  
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: upload comporison report
+        uses: actions/upload-artifact@v4
+        with:
+          name: diffreports-${{ matrix.release }}
+          path: test-results/*.pdf
+        
