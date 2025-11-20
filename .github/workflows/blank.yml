@@ -1,4 +1,4 @@
-name: CI
+name: Polyspace CI
 
 on:
   push:
@@ -11,33 +11,33 @@ jobs:
   build:
     runs-on: self-hosted
 
-    strategy:
-      matrix:
-        release: [ 2024b ]
-
     steps:
-      - name: checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: run Polyspace Bug Finder
+      - name: Run Polyspace Bug Finder
         shell: cmd
+        env:
+          POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
         run: |
-          polyspace-bug-finder-navigator ^
+          "%POLYSPACE_BIN%\\polyspace-bug-finder.exe" ^
             -project pst_deneme.psprj ^
             -results-dir results_bug_finder ^
             -output-name bug_finder_results
 
-      - name: generate Polyspace report
+      - name: Generate Polyspace Report
         shell: cmd
+        env:
+          POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
         run: |
-          polyspace-report-generator ^
-            -results-dir results_bug_finder ^
-            -report-dir results_bug_finder/report ^
+          "%POLYSPACE_BIN%\\polyspace-report-generator.exe" ^
+            -results-dir results_bug-finder ^
+            -report-dir results_bug_finder\\report ^
             -format pdf,html ^
             -include-categories all
 
-      - name: upload comparison report
+      - name: Upload Polyspace Reports
         uses: actions/upload-artifact@v4
         with:
-          name: polyspace-reports-${{ matrix.release }}
+          name: polyspace-reports
           path: results_bug_finder/report/*.pdf
