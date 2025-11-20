@@ -38,7 +38,7 @@ jobs:
            -output-name bug_finder_results
          
 
-     - name: generate report polyspace
+      - name: generate
         run: | 
          polyspace-report-generator \
            -results-dir results_bug_finder \
