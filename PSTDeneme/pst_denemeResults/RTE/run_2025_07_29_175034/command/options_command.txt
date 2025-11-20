@@ -1,0 +1,12 @@
+# Options file
+-author murat.atlihan
+-sources-encoding system
+-sources-list-file .\source_command.txt
+-compiler generic
+-custom-target true,8,2,4,-1,4,8,4,8,8,8,8,1,little,unsigned_long_long,long_long,unsigned_short
+-lang c
+-main-generator
+-to Software Safety Analysis level 2
+-DPST_ENABLE_BLOCKS_API
+-I C:\Program Files\Polyspace\R2024a\polyspace\pstest\pstunit\include
+-library pstunit

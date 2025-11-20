@@ -1,0 +1,4 @@
+﻿-I"C:\Program Files\Polyspace\R2024a\extern\include"
+-I"C:\Program Files\Polyspace\R2024a\toolbox\polyspace\pstest\services\driver\host\c"
+-I"C:\Program Files\Polyspace\R2024a\polyspace\pstest\pstunit\include"
+-I"C:\Program Files\Polyspace\R2024a\polyspace\pstest\pstunit\src"

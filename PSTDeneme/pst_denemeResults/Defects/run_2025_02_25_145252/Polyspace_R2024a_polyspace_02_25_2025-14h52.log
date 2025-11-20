@@ -1,0 +1,244 @@
+<polyspace-bug-finder R2024a PID35120 PGID35120>
+
+Polyspace verification of polyspace project.
+Starting at 02/25/2025, 14h52.
+
+
+
+Verifying sources compliance ...
+
+Options used with Verifier:
+-prog=polyspace
+-lang=C
+-target=i386
+-polyspace-version=24.1 (R2024a)
+-verif-version=1.0
+-results-dir=E:\Denemeler\PSTDeneme\pst_denemeResults\Defects\run_2025_02_25_145252
+-date=25/02/2025
+
+User:
+-compiler=generic
+-custom-target=true,8,2,4,-1,4,8,4,8,8,8,8,1,little,unsigned_long_long,long_long,unsigned_short
+-author=murat.atlihan
+-main-generator=true
+-sources-encoding=system
+
+
+Checkers enabled:
+    Defects 95/274
+
+
+Verifying host configuration:
+Number of physical cores:                8
+Number of logical cores:                 16
+Processor type:                          amd64
+Processor model:                11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz
+Processor frequency:            2.304 GHz
+Memory > 4 GB:                                                     15.73 GB
+Tmp space available in C:\Users\MURAT~1.ATL\AppData\Local\Temp:    27.20 GB
+
+Remark: 8 physical core(s) detected. The verification creates 8 process(es).
+*** Configuration of the host :	OK
+
+Type E:\Denemeler\PSTDeneme\pst_denemeResults\Defects\run_2025_02_25_145252\kill-rte-kernel.bat on host FGS06ENG07 to halt Verifier process
+
+Checking license ...
+License is OK
+
+
+Polyspace C analysis
+Copyright 1999-2023 The MathWorks, Inc.
+All rights reserved.
+
+Starting at: 2025-02-25 14:52:55
+Host: MINGW64_NTx_64-6.2 FGS06ENG07 0 amd64
+User: murat.atlihan
+**********************************************************
+***
+*** Verifying C sources
+***
+**********************************************************
+
+Verifying sources ...
+Verifying ps_deneme.c (1/1)
+
+User time for compilation.unit: 00:00:01.14 (1.14real, 1.14u + 0s)
+Global compilation phase...
+
+Number of files                  : 1
+Number of lines                  : 19
+Number of lines without comments : 19
+
+These metrics include header file content in addition to source files and reflect the true complexity of code and analysis.
+Number of source files    : 1
+Number of C lines of code : 19 (excludes commented (0) and empty lines (0))
+Number of headers         : 1 (directly included in sources 0, Maximum depth of inclusion 0)
+
+Verifying cross-files ANSI C compliance
+User time for compilation.link1: 00:00:00.21 (0.22real, 0.22u + 0s)
+
+Stubbing standard library functions ...
+Doing code transformations ...
+User time for compilation.PQL: 00:00:00.00 (0.00real)
+User time for compilation.link2: 00:00:00.87 (0.87real, 0.87u + 0s)
+Remark: The generated default DRS XML file "drs-template.xml" can be found in <result_dir> folder.
+
+
+
+Packing compilation data
+
+Defects statistics:
+  - Total number of defects: 0
+done.
+
+**********************************************************
+***
+*** C sources verification done
+***
+**********************************************************
+Ending at: 2025-02-25 14:52:58
+User time for compilation: 00:00:02.96 (2.97real, 2.97u + 0s)
+
+Polyspace C analysis
+Copyright 1999-2023 The MathWorks, Inc.
+All rights reserved.
+
+Starting at: 2025-02-25 14:52:58
+Host: MINGW64_NTx_64-6.2 FGS06ENG07 0 amd64
+User: murat.atlihan
+**********************************************************
+***
+*** Beginning Bug-finder - Pre-analysis
+***
+**********************************************************
+**** Bug-finder - Pre-analysis - 1 (P_AL)
+Total complexity = 119
+**** Bug-finder - Pre-analysis - 1 (P_AL) took 0.09real, 0.09u + 0s
+**** Bug-finder - Pre-analysis - 2 (P_ACP)
+* n-acp-t = 0 n-epp' = 0 n-acp-l = 0
+**** Bug-finder - Pre-analysis - 2 (P_ACP) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 3 (P_O)
+**** Bug-finder - Pre-analysis - 3 (P_O) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 4 (P_MA)
+**** Bug-finder - Pre-analysis - 4 (P_MA) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 5 (P_G)
+**** Bug-finder - Pre-analysis - 5 (P_G) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 6 (P_DRC)
+**** Bug-finder - Pre-analysis - 6 (P_DRC) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 7 (P_TT)
+**** Bug-finder - Pre-analysis - 7 (P_TT) took 0real, 0u + 0s
+**** Bug-finder - Pre-analysis - 8 (P_FI)
+**** Bug-finder - Pre-analysis - 8 (P_FI) took 0.01real, 0.01u + 0s
+
+Generating GUI files
+
+Defects statistics:
+  - Total number of defects: 0
+
+GUI files generation completed in 0.28real
+
+**********************************************************
+***
+*** Bug-finder - Pre-analysis done
+***
+**********************************************************
+Ending at: 2025-02-25 14:52:59
+User time for pre-analysis: 00:00:00.76 (0.77real, 0.77u + 0s (0.02gc))
+
+Polyspace C analysis
+Copyright 1999-2023 The MathWorks, Inc.
+All rights reserved.
+
+Starting at: 2025-02-25 14:52:59
+Host: MINGW64_NTx_64-6.2 FGS06ENG07 0 amd64
+User: murat.atlihan
+**********************************************************
+***
+*** Beginning Bug-finder - Function Analysis
+***
+**********************************************************
+**** Bug-finder - Function Analysis - (Verifying function #1 / 1: whichQuadrant)
+**** Bug-finder - Function Analysis - (Verifying function #1 / 1: whichQuadrant) took 0.7real
+Maximum Memory Usage: 573 MB
+
+Generating GUI files
+
+Defects statistics:
+  - Total number of defects: 0
+
+GUI files generation completed in 0.33real
+
+* Total IL complexity: 50
+
+**********************************************************
+***
+*** Bug-finder - Function Analysis done
+***
+**********************************************************
+Ending at: 2025-02-25 14:53:00
+User time for function: 00:00:01.32 (1.33real, 1.33u + 0s (0.02gc))
+
+Polyspace C analysis
+Copyright 1999-2023 The MathWorks, Inc.
+All rights reserved.
+
+Starting at: 2025-02-25 14:53:00
+Host: MINGW64_NTx_64-6.2 FGS06ENG07 0 amd64
+User: murat.atlihan
+**********************************************************
+***
+*** Beginning Bug-finder - Module Analysis
+***
+**********************************************************
+**** Bug-finder - Module Analysis - 1 (Computing modules)
+**** Bug-finder - Module Analysis - 1 (Computing modules) took 0.04real, 0.04u + 0s
+* Created no module as there are no available user functions, or all functions are independent
+Maximum Memory Usage: 0 MB
+
+Generating GUI files
+
+Defects statistics:
+  - Total number of defects: 0
+
+GUI files generation completed in 0.4real
+
+**********************************************************
+***
+*** Bug-finder - Module Analysis done
+***
+**********************************************************
+Ending at: 2025-02-25 14:53:01
+User time for module: 00:00:00.48 (0.48real, 0.48u + 0s (0.02gc))
+
+Polyspace C analysis
+Copyright 1999-2023 The MathWorks, Inc.
+All rights reserved.
+
+Starting at: 2025-02-25 14:53:01
+Host: MINGW64_NTx_64-6.2 FGS06ENG07 0 amd64
+User: murat.atlihan
+**********************************************************
+***
+*** Beginning Bug-finder - Global analysis
+***
+**********************************************************
+
+Generating GUI files
+
+Defects statistics:
+  - Total number of defects: 0
+
+GUI files generation completed in 0.4real
+
+**********************************************************
+***
+*** Bug-finder - Global analysis done
+***
+**********************************************************
+Ending at: 2025-02-25 14:53:01
+User time for global: 00:00:00.57 (0.57real, 0.57u + 0s)
+User time for polyspace-bug-finder: 00:00:07.64 (7.64real, 7.64u + 0s (0.09gc))
+
+***
+*** End of Polyspace analysis
+***
