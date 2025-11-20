@@ -1,0 +1,8 @@
+#include "pstunit.h"
+
+PST_EXTERN_REGFCN_PROTO(pstestRegisterGeneratedTests);
+static void pst_register_suites(void) {
+    PST_REGFCN_CALL(pstestRegisterGeneratedTests);
+}
+
+#include "pst_host_main.c"

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      pre.code { font-family: Courier; font-size: small; }
+      table.code { border-spacing:0px; border: 0px }
+      table.code tr td { color: #112266; vertical-align: top; white-space:pre; padding-left: 10px; }
+      table.code tr td:first-child { font-style: italic; color: #888888; text-align: right; padding-left:0px; }
+      table.code tr td:not(:first-child) span a { color: inherit; }
+      .tooltip { display:block; border:1px solid #000; background: #FFFFEC; position: absolute; }
+      .tooltipCloseButton { float:right; margin: 0px; padding: 0px; }
+      .tooltipContent { display:block; padding-right: 25px; padding-bottom: 25px; }
+      table.tooltipManyRes { border-collapse: collapse; border-style: hidden; }
+      table.tooltipManyRes tr { border: 1px solid black; border-left: 0; border-right: 0; }
+      table.tooltipManyRes td { padding-right: 25px; padding-bottom: 25px; }
+      .ct { font-style: italic; color: #117755 }
+      .pp { font-weight:bold; color: #992211 }
+      .kw, .br { font-weight:bold; color: #112266 }
+      .dt { font-weight:bold; color: #112266 }
+      .tk { font-style: normal; color: #112266 }
+      .nfc { font-weight: normal; background-color: pink }
+      .jnfc { font-weight: normal; background-color: aqua }
+      .st { font-weight: normal; color: #B404AE }
+      .nu { font-weight: normal; color:blue }
+      .cvdbversion_info { margin-left: 10px; border-spacing: 1px; }
+      .cvdbversion_info td { padding: 5px; width: 300px; }
+      .filterfile_info { margin-left: 10px; }
+      .filterfile_info td { padding: 5px; }
+      .filter_info { border: 1px solid; border-top-color: gray; border-left-color: gray; border-right-color: black; border-bottom-color: black; border-spacing: 1px; }
+      .filter_info tr td { border: 1px solid; border-top-color: black; border-left-color: black; border-right-color: gray; border-bottom-color: gray; padding: 5px; }
+      .filter_info thead { font-weight: bold; }
+      .file_info { margin-left: 10px; border-spacing: 1px; }
+      .file_info td { padding: 5px; width: 300px; }
+      .harness_opts { margin-left: 10px; border-spacing: 1px; }
+      .harness_opts td { padding: 5px; width: 300px; }
+      .coverage_opts { margin-left: 10px; border-spacing: 1px; }
+      .coverage_opts td { padding: 5px; width: 300px; }
+      .aggregtest_details { border: 1px solid; border-top-color: gray; border-left-color: gray; border-right-color: black; border-bottom-color: black; border-spacing: 1px; margin-left: 0px; }
+      .aggregtest_details thead { font-weight: bold; text-align: left; }
+      .aggregtest_details thead td:nth-child(2) { min-width: 150px; }
+      .aggregtest_details tr td { border: 1px solid; border-top-color: black; border-left-color: black; border-right-color: gray; border-bottom-color: gray; padding: 5px; }
+      .run_info { margin-left: 10px; border-spacing: 1px; }
+      .run_info thead { font-weight: bold; }
+      .run_info td { padding: 5px; padding-right: 30px; }
+      .instances_info { margin-left: 10px; border-spacing: 1px; }
+      .instances_info tr { vertical-align: top; }
+      .instances_info td { padding: 5px; }
+      .top_summary_heading { text-decoration: underline; }
+      .top_summary { border-collapse: collapse; }
+      .top_summary thead > tr > td { border-top: 1px solid; border-bottom: 1px solid; }
+      .summary { font-size: small; }
+      .summary { border-spacing: 1px; }
+      .summary td { padding: 2px; }
+      .summary td:not(:first-child) { text-align: center; }
+      .summary thead { text-align: center; font-weight: bold; }
+      .summary_sub_section { font-weight: bold; }
+      .bar_graph { margin-left: 5px; margin-right: 5px; border-spacing: 0px; border-collapse: collapse; }
+      .bar_graph td { padding: 0px; }
+      .bar_graph img { border: 0px; height: 6px; }
+      .code_refs_list { margin-left: 25px; }
+      .code_refs_list tr { vertical-align: top; }
+      .code_refs_list td:first-child { font-weight: bold; width: 150px; }
+      .inner_summary { margin-left: 25px; }
+      .inner_summary thead { font-weight: bold; }
+      .inner_summary td:first-child { width: 200px; }
+      .inner_summary td:not(:first-child):not(:last-child) { width: 400px; }
+      .inner_summary td { text-align: left; }
+      .inner_full_cov_summary { margin-left: 50px; }
+      .inner_full_cov_summary thead { font-weight: bold; }
+      .inner_full_cov_summary td:first-child { padding-right: 50px; white-space: nowrap; }
+      h5 { margin-left: 25px; margin-bottom: 0px; font-size: 100%; font-weight: bold; }
+      .uncovered { background-color: #FFD0D0; }
+      .justified { background-color: aqua; }
+      .decision_details { border: 1px solid; border-top-color: gray; border-left-color: gray; border-right-color: black; border-bottom-color: black; border-spacing: 1px; margin-left: 25px; }
+      .decision_details tr td { border: 1px solid; border-top-color: black; border-left-color: black; border-right-color: gray; border-bottom-color: gray; padding: 5px; }
+      .decision_details tr td:first-child { min-width: 250px; padding: 5px; }
+      .decision_details tr td:first-child code { font-size: small; }
+      .decision_details tbody > tr > td:first-child { padding-left: 25px; }
+      .decision_details thead > tr > td:not(:first-child) { min-width: 50px; text-align: center; }
+      .decision_details tbody > tr > td:not(:first-child) { text-align: center; }
+      .condition_details { border: 1px solid; border-top-color: gray; border-left-color: gray; border-right-color: black; border-bottom-color: black; border-spacing: 1px; margin-left: 25px; }
+      .condition_details thead { font-weight: bold; }
+      .condition_details tr td { border: 1px solid; border-top-color: black; border-left-color: black; border-right-color: gray; border-bottom-color: gray; padding: 5px; }
+      .condition_details tr td:first-child { min-width: 250px; padding: 5px; }
+      .condition_details tr td:first-child code { font-size: small; }
+      .condition_details tbody > tr > td:first-child { padding-left: 25px; }
+      .condition_details td:not(:first-child) { min-width: 50px; text-align: center; }
+      .mcdc_details { border: 1px solid; border-top-color: gray; border-left-color: gray; border-right-color: black; border-bottom-color: black; border-spacing: 1px; margin-left: 25px; }
+      .mcdc_details thead { font-weight: bold; }
+      .mcdc_details tr td { border: 1px solid; border-top-color: black; border-left-color: black; border-right-color: gray; border-bottom-color: gray; padding: 5px; }
+      .mcdc_details td { padding: 5px; }
+      .mcdc_details tr td:first-child { min-width: 250px; padding: 5px; }
+      .mcdc_details tbody > tr:not(:first-child) > td:first-child { padding-left: 25px; }
+      .mcdc_details tbody > tr:not(:first-child) > td:first-child code { font-size: small; }
+      .mcdc_details td:not(:first-child) { width: 50px; text-align: center; }
+      .curr_cnd_in_combination { font-weight: bold; color: blue; }
+      .BLUECOV {background-color: blue; font-size: 5px;}
+      .AQUACOV {background-color: aqua; font-size: 5px;}
+      .GREYCOV {background-color: grey; font-size: 5px;}
+      .PINKCOV {background-color: pink; font-size: 5px;}
+      .WHITECOV {background-color: white; font-size: 5px;}
+      .BLUEPROF {background-color: lightblue; font-size: 5px;}
+    </style>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Code Coverage Summary Report</title>
+  </head>
+  <body>
+    <h1>Code Coverage Summary Report</h1>
+    <div name="RPT_TOC">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#analysisinformation">Analysis Information</a></li>
+        <li><a href="#tests">Tests</a></li>
+        <li><a href="#coveragesummary">Coverage Summary</a></li>
+        <li><a href="#details">Details</a></li>
+        <li><a href="#code">Code</a></li>
+      </ol>
+    </div>
+    <div name="RPT_INFO">
+      <a name="analysisinformation"/><h2>Analysis Information</h2>
+      <a name="codeinformation"/><h3>File Information</h3>
+      <table class="file_info">
+        <tr>
+          <td>Last modified time</td>
+          <td>2025-02-25 13:06:49</td>
+        </tr>
+        <tr>
+          <td>File size</td>
+          <td>309 B</td>
+        </tr>
+        <tr>
+          <td>MD5 checksum</td>
+          <td>005497E0006D88CC108AD43E250C07B8</td>
+        </tr>
+      </table>
+      <a name="coverageoptions"/><h3>Coverage Options</h3>
+      <table class="coverage_opts">
+        <tr>
+          <td>Decision</td>
+          <td>on</td>
+        </tr>
+        <tr>
+          <td>Condition</td>
+          <td>on</td>
+        </tr>
+        <tr>
+          <td>MCDC</td>
+          <td>off</td>
+        </tr>
+        <tr>
+          <td>Relational Boundary</td>
+          <td>on</td>
+        </tr>
+      </table>
+    </div>
+    <div name="RPT_RUN">
+      <a name="tests"/><h2>Tests</h2>
+      <table class="run_info">
+        <thead>
+          <tr>
+            <td>Test</td>
+            <td>Started execution</td>
+            <td>Ended execution</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Test_Baykar</td>
+          <td>2025-07-30 11:32:42</td>
+          <td>2025-07-30 11:32:42</td>
+        </tr>
+      </table>
+    </div>
+    <div name="RPT_SUMMARY">
+      <a name="coveragesummary"/><h2>Coverage Summary</h2>
+      <table class="summary">
+        <thead>
+          <tr>
+            <td>File Contents/Complexity</td>
+            <td>&#160;</td>
+            <td colspan="12">Test 1</td>
+          </tr>
+          <tr>
+            <td>&#160;</td>
+            <td>&#160;</td>
+            <td colspan="2">Decision</td>
+            <td colspan="2">Condition</td>
+            <td colspan="2">Statement</td>
+            <td colspan="2">Function</td>
+            <td colspan="2">Function exit</td>
+            <td colspan="2">Relational Boundary</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>1 . <a href="#file">ps_deneme.c</a></td>
+          <td>4</td>
+          <td>17%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>17%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>38%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>100%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>25%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>11%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+        </tr>
+        <tr>
+          <td>2 . . . <a href="#fun1">whichQuadrant</a></td>
+          <td>4</td>
+          <td>17%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>17%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>38%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>100%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>25%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+          <td>11%</td>
+          <td><table class="bar_graph"><tr><td class="BLUECOV">&#160;&#160;&#160;</td><td class="PINKCOV">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td></tr></table></td>
+        </tr>
+      </table>
+    </div>
+    <div name="RPT_DETAILS">
+      <a name="details"/><h2>Details</h2>
+      <a name="file"/><h3>1. File <a href="#code"><code>ps_deneme.c</code></a></h3>
+      <table class="code_refs_list">
+        <tr>
+          <td>Function:</td>
+          <td><a href="#fun1"><code>whichQuadrant</code></a> (line <a href="#1">1</a>)</td>
+        </tr>
+        <tr style="visibility:hidden;" id="uncovLinks#file"/>
+      </table>
+      <br/>
+      <table class="inner_summary">
+        <thead>
+          <tr>
+            <td>Coverage Metric</td>
+            <td>Coverage</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Cyclomatic Complexity</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Decision</td>
+          <td>17% (1/6) decision outcomes</td>
+        </tr>
+        <tr>
+          <td>Condition</td>
+          <td>17% (2/12) condition outcomes</td>
+        </tr>
+        <tr>
+          <td>Statement</td>
+          <td>38% (3/8) covered statements</td>
+        </tr>
+        <tr>
+          <td>Function</td>
+          <td>100% (1/1) covered functions</td>
+        </tr>
+        <tr>
+          <td>Relational Boundary</td>
+          <td>11% (2/18) objective outcomes</td>
+        </tr>
+      </table>
+      <a name="fun1"/><h3>2. Function <a href="#1"><code>whichQuadrant</code></a> (line <a href="#1">1</a>)</h3>
+      <table class="code_refs_list">
+        <tr>
+          <td>File:</td>
+          <td><a href="#file"><code>ps_deneme.c</code></a> (<a href="#1">code</a>)</td>
+        </tr>
+        <tr style="visibility:hidden;" id="uncovLinks#fun1"/>
+        <tr>
+          <td>Covered expressions:</td>
+          <td><a href="#node1"><code>x &gt; 0 &amp;&amp; y &gt; 0</code></a> (line <a href="#3">3</a>)<br/><a href="#node2"><code>x &lt; 0 &amp;&amp; y &gt; 0</code></a> (line <a href="#7">7</a>)<br/><a href="#node3"><code>x &lt; 0 &amp;&amp; y &lt; 0</code></a> (line <a href="#11">11</a>)</td>
+        </tr>
+      </table>
+      <div name="tt_fun1">
+        <br/>
+        <table class="inner_summary">
+          <thead>
+            <tr>
+              <td>Coverage Metric</td>
+              <td>Coverage</td>
+            </tr>
+          </thead>
+          <tr>
+            <td>Cyclomatic Complexity</td>
+            <td>4</td>
+          </tr>
+          <tr class="uncovered">
+            <td>Decision</td>
+            <td>17% (1/6) decision outcomes</td>
+          </tr>
+          <tr class="uncovered">
+            <td>Condition</td>
+            <td>17% (2/12) condition outcomes</td>
+          </tr>
+          <tr class="uncovered">
+            <td>Statement</td>
+            <td>38% (3/8) covered statements (1 Function entry + 7 executable statements)</td>
+          </tr>
+          <tr class="uncovered">
+            <td>Relational Boundary</td>
+            <td>11% (2/18) objective outcomes</td>
+          </tr>
+        </table>
+      </div>
+      <a name="node1"/><h4>2.1. Decision/Condition <a href="#3"><code>x &gt; 0 &amp;&amp; y &gt; 0</code></a> (line <a href="#3">3</a>)</h4>
+      <table class="code_refs_list">
+        <tr>
+          <td>Function:</td>
+          <td><a href="#fun1"><code>whichQuadrant</code></a></td>
+        </tr>
+        <tr style="visibility:hidden;" id="uncovLinks#node1"/>
+      </table>
+      <br/>
+      <table class="inner_summary">
+        <thead>
+          <tr>
+            <td>Coverage Metric</td>
+            <td>Coverage</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Decision</td>
+          <td>50% (1/2) decision outcomes</td>
+        </tr>
+        <tr>
+          <td>Condition</td>
+          <td>50% (2/4) condition outcomes</td>
+        </tr>
+        <tr>
+          <td>Relational Boundary</td>
+          <td>33% (2/6) objective outcomes</td>
+        </tr>
+      </table>
+      <div name="node_details">
+        <div name="tt_node1">
+          <h5>Decisions analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a href="#3"><code>x &gt; 0 &amp;&amp; y &gt; 0</code></a></td>
+                <td>50%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>false</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>true</td>
+              <td>1+</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov4">
+          <h5>Conditions analyzed</h5>
+          <table class="condition_details">
+            <thead>
+              <tr>
+                <td>Description</td>
+                <td>True</td>
+                <td>False</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td><a name="cov4"/><a href="#3"><code>x &gt; 0</code></a></td>
+              <td>1+</td>
+              <td>0</td>
+            </tr>
+            <tr class="uncovered">
+              <td><a name="cov9"/><a href="#3"><code>y &gt; 0</code></a></td>
+              <td>1+</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov6">
+          <h5>Relational Boundary analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a name="cov6"/><a href="#3"><code>x</code></a> - <a href="#3"><code>0</code></a></td>
+                <td>33%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>0</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>+1</td>
+              <td>1+</td>
+            </tr>
+            <thead>
+              <tr>
+                <td><a name="cov11"/><a href="#3"><code>y</code></a> - <a href="#3"><code>0</code></a></td>
+                <td>33%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>0</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>+1</td>
+              <td>1+</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <a name="node2"/><h4>2.2. Decision/Condition <a href="#7"><code>x &lt; 0 &amp;&amp; y &gt; 0</code></a> (line <a href="#7">7</a>)</h4>
+      <table class="code_refs_list">
+        <tr>
+          <td>Function:</td>
+          <td><a href="#fun1"><code>whichQuadrant</code></a></td>
+        </tr>
+        <tr style="visibility:hidden;" id="uncovLinks#node2"/>
+      </table>
+      <br/>
+      <table class="inner_summary">
+        <thead>
+          <tr>
+            <td>Coverage Metric</td>
+            <td>Coverage</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Decision</td>
+          <td>0% (0/2) decision outcomes</td>
+        </tr>
+        <tr>
+          <td>Condition</td>
+          <td>0% (0/4) condition outcomes</td>
+        </tr>
+        <tr>
+          <td>Relational Boundary</td>
+          <td>0% (0/6) objective outcomes</td>
+        </tr>
+      </table>
+      <div name="node_details">
+        <div name="tt_node2">
+          <h5>Decisions analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a href="#7"><code>x &lt; 0 &amp;&amp; y &gt; 0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>false</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>true</td>
+              <td>--</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov17">
+          <h5>Conditions analyzed</h5>
+          <table class="condition_details">
+            <thead>
+              <tr>
+                <td>Description</td>
+                <td>True</td>
+                <td>False</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td><a name="cov17"/><a href="#7"><code>x &lt; 0</code></a></td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr class="uncovered">
+              <td><a name="cov22"/><a href="#7"><code>y &gt; 0</code></a></td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov19">
+          <h5>Relational Boundary analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a name="cov19"/><a href="#7"><code>x</code></a> - <a href="#7"><code>0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>+1</td>
+              <td>--</td>
+            </tr>
+            <thead>
+              <tr>
+                <td><a name="cov24"/><a href="#7"><code>y</code></a> - <a href="#7"><code>0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>+1</td>
+              <td>--</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <a name="node3"/><h4>2.3. Decision/Condition <a href="#11"><code>x &lt; 0 &amp;&amp; y &lt; 0</code></a> (line <a href="#11">11</a>)</h4>
+      <table class="code_refs_list">
+        <tr>
+          <td>Function:</td>
+          <td><a href="#fun1"><code>whichQuadrant</code></a></td>
+        </tr>
+        <tr style="visibility:hidden;" id="uncovLinks#node3"/>
+      </table>
+      <br/>
+      <table class="inner_summary">
+        <thead>
+          <tr>
+            <td>Coverage Metric</td>
+            <td>Coverage</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Decision</td>
+          <td>0% (0/2) decision outcomes</td>
+        </tr>
+        <tr>
+          <td>Condition</td>
+          <td>0% (0/4) condition outcomes</td>
+        </tr>
+        <tr>
+          <td>Relational Boundary</td>
+          <td>0% (0/6) objective outcomes</td>
+        </tr>
+      </table>
+      <div name="node_details">
+        <div name="tt_node3">
+          <h5>Decisions analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a href="#11"><code>x &lt; 0 &amp;&amp; y &lt; 0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>false</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>true</td>
+              <td>--</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov30">
+          <h5>Conditions analyzed</h5>
+          <table class="condition_details">
+            <thead>
+              <tr>
+                <td>Description</td>
+                <td>True</td>
+                <td>False</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td><a name="cov30"/><a href="#11"><code>x &lt; 0</code></a></td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr class="uncovered">
+              <td><a name="cov35"/><a href="#11"><code>y &lt; 0</code></a></td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+        <div name="tt_cov32">
+          <h5>Relational Boundary analyzed</h5>
+          <table class="decision_details">
+            <thead>
+              <tr>
+                <td><a name="cov32"/><a href="#11"><code>x</code></a> - <a href="#11"><code>0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>+1</td>
+              <td>--</td>
+            </tr>
+            <thead>
+              <tr>
+                <td><a name="cov37"/><a href="#11"><code>y</code></a> - <a href="#11"><code>0</code></a></td>
+                <td>0%</td>
+              </tr>
+            </thead>
+            <tr class="uncovered">
+              <td>-1</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>0</td>
+              <td>--</td>
+            </tr>
+            <tr class="uncovered">
+              <td>+1</td>
+              <td>--</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div name="RPT_CODE">
+      <a name="code"/><h2>Code</h2>
+      <pre id="code">
+        <table class="code" id="codeTbl">
+          <tr id="1"><td><a href="#fun1" class="covlnk">1</a></td><td><a class="kw">int</a> whichQuadrant(<a class="kw">int</a> x, <a class="kw">int</a> y)</td></tr>
+          <tr id="2"><td>2</td><td>{</td></tr>
+          <tr id="3"><td><a href="#node1" class="covlnk">3</a></td><td>    <a class="kw">if</a>(<span class="nfc" title="not fully covered">x &gt; 0</span><span class="nfc" title="not fully covered"> &amp;&amp; </span><span class="nfc" title="not fully covered">y &gt; 0</span>)</td></tr>
+          <tr id="4"><td>4</td><td>        {</td></tr>
+          <tr id="5"><td>5</td><td>            <a class="kw">return</a> 1;</td></tr>
+          <tr id="6"><td>6</td><td>        }</td></tr>
+          <tr id="7"><td><a href="#node2" class="covlnk">7</a></td><td>    <a class="kw">else</a> <span class="nfc" title="uncovered statement"><a class="kw">if</a>(</span><span class="nfc" title="not fully covered ; uncovered statement">x &lt; 0</span><span class="nfc" title="not fully covered ; uncovered statement"> &amp;&amp; </span><span class="nfc" title="not fully covered ; uncovered statement">y &gt; 0</span><span class="nfc" title="uncovered statement">)</span></td></tr>
+          <tr id="8"><td>8</td><td><span class="nfc" title="uncovered statement">        {</span></td></tr>
+          <tr id="9"><td>9</td><td><span class="nfc" title="uncovered statement">            <a class="kw">return</a> 2;</span></td></tr>
+          <tr id="10"><td>10</td><td><span class="nfc" title="uncovered statement">        }</span></td></tr>
+          <tr id="11"><td><a href="#node3" class="covlnk">11</a></td><td><span class="nfc" title="uncovered statement">    <a class="kw">else</a> <a class="kw">if</a>(</span><span class="nfc" title="not fully covered ; uncovered statement">x &lt; 0</span><span class="nfc" title="not fully covered ; uncovered statement"> &amp;&amp; </span><span class="nfc" title="not fully covered ; uncovered statement">y &lt; 0</span><span class="nfc" title="uncovered statement">)</span></td></tr>
+          <tr id="12"><td>12</td><td><span class="nfc" title="uncovered statement">        {</span></td></tr>
+          <tr id="13"><td>13</td><td><span class="nfc" title="uncovered statement">            <a class="kw">return</a> 3;</span></td></tr>
+          <tr id="14"><td>14</td><td><span class="nfc" title="uncovered statement">        }</span></td></tr>
+          <tr id="15"><td>15</td><td><span class="nfc" title="uncovered statement">    <a class="kw">else</a></span></td></tr>
+          <tr id="16"><td>16</td><td><span class="nfc" title="uncovered statement">        {</span></td></tr>
+          <tr id="17"><td>17</td><td><span class="nfc" title="uncovered statement">            <a class="kw">return</a> 4;</span></td></tr>
+          <tr id="18"><td>18</td><td><span class="nfc" title="uncovered statement">        }</span></td></tr>
+          <tr id="19"><td>19</td><td>}</td></tr>
+        </table>
+      </pre>
+    </div>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function() {
+          function updateUncoveredLinks() {
+              var uncoveredItems = ['fun1', 'node1', 'node2', 'node3'];
+              for (var i = 0; i < uncoveredItems.length; i++) {
+                  var trElement = document.getElementById('uncovLinks#' + uncoveredItems[i]);
+                  if (!trElement) continue;
+                  var innerHTML = '&nbsp';
+                  if (i > 0) {
+                      innerHTML += "<a href='#" + uncoveredItems[i-1] + "'><span style='color:red' title='Previous uncovered object'>&#8678</span></a>&nbsp";
+                  }
+                  if (i < uncoveredItems.length-1) {
+                      innerHTML += "<a href='#" + uncoveredItems[i+1] + "'><span style='color:red' title='Next uncovered object'>&#8680</span></a>";
+                  }
+                  trElement.removeAttribute('style');
+                  var newNode = document.createElement('td');
+                  trElement.appendChild(newNode);
+                  var txtNode = document.createElement('b');
+                  txtNode.innerHTML = 'Uncovered Links:';
+                  newNode.appendChild(txtNode);
+                  newNode = document.createElement('td');
+                  newNode.innerHTML = innerHTML;
+                  trElement.appendChild(newNode)
+              }
+          }
+          updateUncoveredLinks();
+      })();
+      //]]>
+    </script>
+    <script type="text/javascript">
+      //<![CDATA[
+    (function() { var href2Span = {}
+    ; function getCandidateRef(href) { var res = undefined; try { if (typeof(href)==="string" && href.length > 4) { var ref = href.substring(1,4); if (ref=="fun" || ref=="cov" || ref=="nod") { res = href.substring(1); }
+    }
+    }
+    catch (err) { }
+    return res; }
+    function register() { try { var lnks = document.getElementsByClassName("covlnk"); if (lnks) { for (var i = 0; i < lnks.length; i++) { var lnk = lnks[i]; var ref = getCandidateRef(lnk.getAttribute("href")); if (ref) { addListener(lnk, "mouseover", openTooltip); var otherRefs = lnk.getAttribute("otherRefs"); if (otherRefs) { var refs = otherRefs.split(","); href2Span[ref] = refs; }
+    }
+    }
+    }
+    fixAbsolutePath(); }
+    catch (err) { }
+    }
+    function closeTooltip(event) { var sElem = href2Span["current"]; if (sElem && sElem[1]) { sElem[1].removeChild(sElem[0]); href2Span["current"] = undefined; return; }
+    }
+    function getCoords(originalElement) { var left = 0; var top = 0; var width = 0; var height = 0; var coords = new Array(); var originalParent = null; var offsetParent = null; var element = null; if (originalElement==null) return null; var originalParent = originalElement.parentNode; var offsetParent = originalElement.offsetParent; var element = originalElement; if (originalElement.offsetWidth) width = originalElement.offsetWidth; if (originalElement.offsetHeight) height = originalElement.offsetHeight; while (element.parentNode != null) { element = element.parentNode; if (element.offsetParent != null) { if (element.scrollLeft && (element.scrollLeft > 0)) left -= element.scrollLeft; if (element.scrollTop && (element.scrollTop > 0)) top -= element.scrollTop; }
+    if (element == offsetParent) { left += originalElement.offsetLeft; if (element.clientLeft && element.nodeName!="TABLE") left += element.clientLeft; top += originalElement.offsetTop; if (element.clientTop && element.nodeName!="TABLE") top += element.clientTop; originalElement = element; offsetParent = originalElement.offsetParent; if (originalElement.offsetParent==null) { if (originalElement.offsetLeft) left += originalElement.offsetLeft; if (originalElement.offsetTop) top += originalElement.offsetTop; }
+    }
+    }
+    coords.left = left; coords.top = top; coords.width = width; coords.height = height; return(coords); }
+    function getNodeDetails(ref) { var obj = undefined; var objs = document.getElementsByName("tt_" + ref); if (objs) { obj = objs[0]; var parent = obj.parentNode; if (parent && parent.nodeName.toUpperCase()=="DIV" && parent.getAttribute("name")=="node_details") { obj = obj.parentNode; }
+    }
+    return obj; }
+    function cloneNodeForTooltip(aNode) { var newObj = aNode.cloneNode(true); var aList = newObj.getElementsByTagName("a"); for(var i = 0; i < aList.length; i++) { var keepHref = false; href = aList[i].getAttribute("href"); if (typeof(href)==="string") { if (href.startsWith("#testInfo_") || href.startsWith("#J") || href.startsWith("matlab:cvi.FilterExplorer")) { keepHref = true; }
+    }
+    if (!keepHref) { aList[i].removeAttribute("href"); }
+    }
+    return newObj; }
+    function addTooltipRow(table, data) { var tr = document.createElement("tr"); var td = document.createElement("td"); table.appendChild(tr); tr.appendChild(td); td.appendChild(data); }
+    function openTooltip(event) { try { var ref = getCandidateRef(event.target.getAttribute("href")); if (!ref) { return; }
+    var sElem = href2Span["current"]; if (sElem && sElem[1]) { sElem[1].removeChild(sElem[0]); href2Span["current"] = undefined; }
+    var obj = getNodeDetails(ref); if (obj) { var spanElem = document.createElement("span"); spanElem.className = "tooltip"; var newObj = cloneNodeForTooltip(obj); var inputTopBarElem = document.createElement("input"); inputTopBarElem.className = "tooltipCloseButton"; inputTopBarElem.type = "button"; inputTopBarElem.value = "X"; addListener(inputTopBarElem, "click", closeTooltip); var spanTopBarElem = document.createElement("span"); spanTopBarElem.appendChild(inputTopBarElem); spanElem.appendChild(spanTopBarElem); var otherRefs = href2Span[ref]; var tableElem = undefined; if (otherRefs) { for (var i = 0; i < otherRefs.length; i++) { obj = getNodeDetails(otherRefs[i]); if (obj) { if (!tableElem) { tableElem = document.createElement("table"); tableElem.setAttribute("class", "tooltipManyRes"); addTooltipRow(tableElem, newObj); }
+    var newOtherObj = cloneNodeForTooltip(obj); addTooltipRow(tableElem, newOtherObj); }
+    }
+    }
+    if (tableElem) { spanElem.appendChild(tableElem); }
+    else { var spanContentElem = document.createElement("span"); spanContentElem.className = "tooltipContent"; spanContentElem.appendChild(newObj); spanElem.appendChild(spanContentElem); }
+    var pos = getCoords(event.target.parentNode); spanElem.style.left = pos.left + 'px'; spanElem.style.top = (pos.top + pos.height) + 'px'; document.body.appendChild(spanElem); href2Span["current"] = [spanElem, document.body]; }
+    }
+    catch (err) { }
+    }
+    function fixAbsolutePath() { try { var baseURI = document.baseURI; if (typeof(baseURI) !== "string"){ if (document.location) baseURI = document.location.href; if (typeof(baseURI) !== "string") baseURI = window.location.href; if (typeof(baseURI) !== "string") baseURI = document.URL.replace("\\", "/"); }
+    var path = baseURI.substring(0, baseURI.lastIndexOf("/")); var aList = document.getElementsByTagName("a"); for (var i = 0; i < aList.length; i++) { var href = aList[i].href; if (href !== "string" && href.search(/[.]html(#[A-Za-z]+[\w\-\:\.]*)*$/)!=-1) { var hrefNotExpended = aList[i].getAttribute('href'); if (hrefNotExpended.search(/^#[A-Za-z]+[\w\-\:\.]*$/)==-1) { var idx = href.lastIndexOf("/"); if (idx == -1) { idx = href.lastIndexOf("\\"); }
+    if (idx != -1) { aList[i].setAttribute("href", path + href.substring(idx)); }
+    }
+    }
+    }
+    }
+    catch (err) {}
+    }
+    function addListener(obj, type, fn) { if (obj.addEventListener) { obj.addEventListener(type, fn, false); }
+    else if (obj.attachEvent) { obj.attachEvent("on" + type, fn); }
+    }
+    addListener(window, "load", register); }
+    )(); 
+      //]]>
+    </script>
+  </body>
+</html>

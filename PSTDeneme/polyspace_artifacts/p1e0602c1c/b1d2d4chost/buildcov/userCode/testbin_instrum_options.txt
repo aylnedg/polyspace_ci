@@ -1,0 +1,8 @@
+-cov-metric-level condition/decision
+-compact
+-cov-relbound
+-cov-relbound-abs-tol 1e-05
+-cov-relbound-rel-tol 0.01
+-cov-mcdc-max-combinations 1000
+-instrum-dir E:\Denemeler\PSTDeneme\polyspace_artifacts\p1e0602c1c\b1d2d4chost\buildcov\userCode\instrumented\testbin
+-instrum-plugins libmwpstest_testgen

@@ -1,0 +1,7 @@
+﻿-I"C:\Program Files\Polyspace\R2024a\extern\include"
+-I"C:\Program Files\Polyspace\R2024a\toolbox\polyspace\pstest\services\driver\host\c"
+-I"C:\Program Files\Polyspace\R2024a\polyspace\pstest\pstunit\include"
+-I"C:\Program Files\Polyspace\R2024a\polyspace\pstest\pstunit\src"
+-IE:\Denemeler\PSTDeneme\polyspace_artifacts\p1e0602c1c\b1d2d4chost\buildstack\graphic_36a1edc7f
+-IE:\Denemeler\PSTDeneme\polyspace_artifacts\p1e0602c1c\b1d2d4chost\codegen\test
+-I"C:\Program Files\Polyspace\R2024a\toolbox\coder\profile\src"
