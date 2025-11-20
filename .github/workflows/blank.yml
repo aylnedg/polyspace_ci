@@ -26,7 +26,7 @@ jobs:
             POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
         run: |
           "%POLYSPACE_BIN%\\polyspace-bug-finder.exe" ^
-          -project PSTDeneme\\pst_deneme.psprj ^
+          -project PSTDeneme\\pst_deneme.psprjx ^
           -results-dir results_bug_finder ^
           -output-name bug_finder_results
 
