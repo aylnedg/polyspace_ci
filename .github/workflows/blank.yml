@@ -1,0 +1,41 @@
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        release: [ R2024b ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run Simulink Tests
+        uses: matlab-actions/run-tests@v2
+        with:
+          release: ${{ matrix.release }}
+          test-results-pdf: test-results/pdf-results.pdf
+
+      # Runs a set of commands using the runners shell
+      - name: Upload comporison reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: diffreports-${{ matrix.release }}
+          path: test-results/*.pdf
+        
