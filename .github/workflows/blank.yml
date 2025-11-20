@@ -15,15 +15,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Polyspace Bug Finder
+      - name: run Polyspace Bug Finder
         shell: cmd
         env:
-          POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
+            POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
         run: |
           "%POLYSPACE_BIN%\\polyspace-bug-finder.exe" ^
-            -project pst_deneme.psprj ^
-            -results-dir results_bug_finder ^
-            -output-name bug_finder_results
+          -project PSTDeneme\\pst_deneme.psprj ^
+          -results-dir results_bug_finder ^
+          -output-name bug_finder_results
+
 
       - name: Generate Polyspace Report
         shell: cmd
