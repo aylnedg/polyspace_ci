@@ -25,10 +25,10 @@ jobs:
         env:
             POLYSPACE_BIN: "C:\\Program Files\\Polyspace\\R2024b\\polyspace\\bin"
         run: |
-          "%POLYSPACE_BIN%\\polyspace-bug-finder.exe" ^
-          -project "C:\\Users\\labuser\\actions-runner\\_work\\polyspace_ci\\polyspace_ci\\PSTDeneme\\pst_deneme.psprj" ^
-          -results-dir results_bug_finder ^
-          -output-name bug_finder_results
+          "%POLYSPACE_BIN%\\polyspace-desktop-ui.exe" ^
+          -project "C:\\Users\\labuser\\actions-runner\\_work\\polyspace_ci\\polyspace_ci\\PSTDeneme\\pst_deneme.psprjx" ^
+          -results-dir results_test ^
+          -output-name test_results
 
 
       - name: Generate Polyspace Report
